@@ -36,4 +36,4 @@ select
     q7_delivered_high_quality,
     q22_tech_knowledge_support,
     q30_instance_did_differently
-from {{ source('gk_work_management', 'questions') }}
+from {{ source('gk_work_management', 'review_for_individual') }}

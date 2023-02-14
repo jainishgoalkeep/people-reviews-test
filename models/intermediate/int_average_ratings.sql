@@ -4,22 +4,22 @@ with
     source as (select * from {{ ref("int_unpivot_ratings") }}),
 
     average_rating as (
-        select 
+        select
             filled_for,
             year_and_quarter,
             review_type,
             question,
-            CONCAT(filled_for, '--', CAST(year_and_quarter AS STRING), '--', question) as concat_id,
-            AVG(rating) AS avg_rating,
-            COUNT(DISTINCT review_id) AS count_of_responses
+            concat(
+                filled_for, '--', cast(year_and_quarter as string), '--', question
+            ) as concat_id,
+            avg(rating) as avg_rating,
+            count(distinct review_id) as count_of_responses
         from source
-           
-        Where rating is not null
-        
-        GROUP BY 
-            1, 2, 3, 4
-        ORDER BY 
-            1, 2, 3, 4 
+
+        where rating is not null
+
+        group by 1, 2, 3, 4
+        order by 1, 2, 3, 4
     )
 
 select *

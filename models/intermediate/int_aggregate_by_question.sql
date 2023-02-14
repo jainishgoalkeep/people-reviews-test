@@ -4,19 +4,17 @@ with
     source as (select * from {{ ref("int_unpivot_ratings") }}),
 
     aggregate_by_question as (
-        select 
+        select
             filled_for,
             year_and_quarter,
-            CAST(REGEXP_EXTRACT(question, r'q(\d+)_.*') AS INT64) AS question_number,
-            AVG(rating) AS overall_avg_rating,
-            COUNT(DISTINCT review_id) AS count_of_responses
+            cast(regexp_extract(question, r'q(\d+)_.*') as int64) as question_number,
+            avg(rating) as overall_avg_rating,
+            count(distinct review_id) as count_of_responses
         from source
 
-        GROUP BY 
-         1, 2, 3
-        ORDER BY 
-         1, 2, 3   
-       
+        group by 1, 2, 3
+        order by 1, 2, 3
+
     )
 
 select *

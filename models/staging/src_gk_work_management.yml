@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: gk_work_management
+    database: data-pipeline-research
+    schema: gk_work_management
+    tables:
+      - name: questions
+      - name: review_for_individual
